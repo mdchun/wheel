@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Promise</title>
+  <script src="./index.js"></script>
+</head>
+
+<body>
+  <script>
+    // let p = new Promise((resolve, reject) => {
+    //   resolve('hello')
+    // })
+    // p.then((data) => {
+    //   console.log(1, data)
+    // })
+    // p.then((data) => {
+    //   console.log(2, data)
+    // })
+    let p1 = new MyPromise((resolve, reject) => {
+      resolve('1my hello')
+    })
+    let p2 = new MyPromise((resolve, reject) => {
+      reject('2my hello')
+    })
+    let p3 = new MyPromise((resolve, reject) => {
+      reject('3my hello')
+    })
+    let p4 = new MyPromise((resolve, reject) => {
+      reject('4my hello')
+    })
+    // p1.then(d => {
+    //   console.log(d)
+    //   return new MyPromise((resolve, reject) => {
+    //     setTimeout(_ => {
+    //       resolve('2s after。。')
+    //     }, 2000)
+    //   })
+    // }).then(d => {
+    //   console.log(d)
+    //   return MyPromise.reject(121)
+    // }).then(t => {
+    //   console.log(t)
+    // }).catch(e => {
+    //   console.log('eee', e)
+    // })
+
+    p1.then(res => {
+      console.log(res)
+    }).catch(e => {
+      console.log(e)
+    }).finally(e => {
+      console.log(11)
+    })
+  </script>
+</body>
+
+</html>
