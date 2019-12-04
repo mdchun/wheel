@@ -1,4 +1,9 @@
 function createStore(reducer, enhancer) {
+	// 强化器
+	if (enhancer) {
+		return enhancer(createStore)(reducer)
+	}
+
 	let state
 	let currentReducer = reducer
 	let listeners = []
@@ -11,7 +16,7 @@ function createStore(reducer, enhancer) {
 		listeners.push(handler)
 
 		return function unsubscribe() {
-			listeners = listeners.filter(l => l != handler)
+			listeners = listeners.filter(l => l !== handler)
 		}
 	}
 

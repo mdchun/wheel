@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { createStore } from './redux'
+import { createStore, applyMiddleware } from './redux'
 
 function count(state = 0, action) {
 	switch (action.type) {
@@ -10,7 +10,16 @@ function count(state = 0, action) {
 	}
 }
 
-const store = createStore(count)
+function logger({ dispatch, getState }) {
+	return dispatch => action => {
+		console.log(action)
+		// 下一个中间件
+		return dispatch(action)
+		// return dispatch
+	}
+}
+
+const store = createStore(count, applyMiddleware(logger))
 
 export default class App extends Component {
 	constructor(props) {
