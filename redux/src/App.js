@@ -15,11 +15,18 @@ function logger({ dispatch, getState }) {
 		console.log(action)
 		// 下一个中间件
 		return dispatch(action)
-		// return dispatch
 	}
 }
 
-const store = createStore(count, applyMiddleware(logger))
+const thunk = ({ dispatch, getState }) => dispatch => action => {
+	if (typeof action === 'function') {
+		// 将dispatch传入到action，在异步结束之后调用
+		return action(dispatch, getState)
+	}
+	return dispatch(action)
+}
+
+const store = createStore(count, applyMiddleware(logger, thunk))
 
 export default class App extends Component {
 	constructor(props) {
