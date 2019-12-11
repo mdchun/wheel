@@ -28,7 +28,7 @@ export default connect(
 		console.log(state)
 		return { count: state }
 	},
-	dispatch => {
+	props => {
 		console.log(props)
 		return { dispatch: props }
 	}
