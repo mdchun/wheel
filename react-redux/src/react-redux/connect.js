@@ -1,5 +1,5 @@
-import React, { Component, useContext, useEffect } from 'react'
-import { bindActionCreators } from '../redux'
+import React from 'react'
+// import { bindActionCreators } from '../redux'
 import ReactReduxContext from './Context'
 
 const connect = (
