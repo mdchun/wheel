@@ -2,21 +2,26 @@ const http = require('http')
 const context = require('./context')
 const request = require('./request')
 const response = require('./response')
+const compose = require('./compose')
 
 class Koa {
+	middleware = []
+
 	listen(...args) {
-		const server = http.createServer((req, res) => {
+		const server = http.createServer(async (req, res) => {
 			// this.callback(req, res)
 			const ctx = this.createContext(req, res)
-			this.callback(ctx)
+			const fn = compose(this.middleware)
+			await fn(ctx)
+			// this.callback(ctx)
 			res.end(ctx.body)
 		})
 
 		server.listen(...args)
 	}
 	// 注册中间件
-	use(callback) {
-		this.callback = callback
+	use(mid) {
+		this.middleware.push(mid)
 	}
 
 	createContext(req, res) {
